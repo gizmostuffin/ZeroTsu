@@ -1,5 +1,5 @@
-python-telegram-bot
-nekos.py
-requests
-Pillow
-pyyaml
+python-telegram-bot==20.6
+nekos.py==1.1.0
+requests==2.31.0
+Pillow==10.1.0
+PyYAML==6.0.1
