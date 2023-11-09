@@ -21,8 +21,10 @@
 # SOFTWARE.
 
 
-from telegram import (Update, ParseMode, InlineKeyboardMarkup, 
+from telegram import (Update, InlineKeyboardMarkup, 
                       InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton )
+from telegram.constants import ParseMode
+
 
 from telegram.ext import CallbackContext
 
@@ -42,7 +44,7 @@ def chelp(update: Update, context: CallbackContext) -> None:
             parse_mode=ParseMode.MARKDOWN
     )
     
-def help(update: Update, context: CallbackContext) -> None:
+async def help(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     if query.data == "zero_help":
         keyboard = [
@@ -51,7 +53,7 @@ def help(update: Update, context: CallbackContext) -> None:
                                      callback_data="zero_back")
             ]
                ]
-        query.message.edit_text(
+        await query.message.edit_text(
             String.HELP_MESSAGE,
             reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode=ParseMode.MARKDOWN
@@ -69,7 +71,7 @@ def help(update: Update, context: CallbackContext) -> None:
                                      callback_data="zero_support")
             ]
                ]
-        query.message.edit_text(
+        await query.message.edit_text(
             String.START_MESSAGE.format(query.from_user.first_name),
             reply_markup=InlineKeyboardMarkup(keyboard),
             disable_web_page_preview=True,
@@ -82,7 +84,7 @@ def help(update: Update, context: CallbackContext) -> None:
                                      callback_data="zero_back")
             ]
                ]
-        query.message.edit_text(
+        await query.message.edit_text(
             String.SUPPORT_MESSAGE,
             reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode=ParseMode.MARKDOWN
@@ -94,7 +96,7 @@ def help(update: Update, context: CallbackContext) -> None:
                                      callback_data="zero_back")
             ]
                ]
-        query.message.edit_text(
+        await query.message.edit_text(
             String.SOURCE_MESSAGE,
             reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode=ParseMode.MARKDOWN

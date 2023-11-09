@@ -21,15 +21,17 @@
 # SOFTWARE.
 
 
-from telegram import (Update, ParseMode, InlineKeyboardMarkup, 
+from telegram import (Update, InlineKeyboardMarkup, 
                       InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton )
+from telegram.constants import ParseMode
+
 
 from telegram.ext import CallbackContext
 
 from bot.String import String
 
 
-def start(update: Update, context: CallbackContext) -> None:
+async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
             [
                 InlineKeyboardButton(text="Commands available ❔",
@@ -42,7 +44,7 @@ def start(update: Update, context: CallbackContext) -> None:
                                      callback_data="zero_support")
             ]
                ]
-    update.message.reply_text(
+    await update.message.reply_text(
         String.START_MESSAGE.format(update.message.from_user.first_name),
         reply_markup=InlineKeyboardMarkup(keyboard),
         disable_web_page_preview=True,
